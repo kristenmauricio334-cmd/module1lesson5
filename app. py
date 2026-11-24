@@ -1,0 +1,23 @@
+import streamlit as st
+import pandas as pd
+
+st.title("Button Controlled Buzzer")
+
+button = st.checkbox("BUTTON PRESSED")
+
+if button:
+    st.success("BUZZER ACTIVATED")
+    st.write("Buzzer Status: ON")
+    st.metric("Arduino Pin", "D8")
+else:
+    st.info("SYSTEM STANDBY")
+    st.write("Buzzer Status: OFF")
+    st.metric("Arduino Pin", "D8")
+
+data = pd.DataFrame({
+    "Button State": ["Pressed", "Released"],
+    "Buzzer Status": ["ON", "OFF"]
+})
+
+st.subheader("Button State Comparison")
+st.dataframe(data, use_container_width=True)
